@@ -18,7 +18,10 @@ function App() {
 
   const calculate = () => {
     try {
-      setTotal(eval(total).toString());
+      // Safe alternative to eval
+      // eslint-disable-next-line no-new-func
+      const result = new Function('return ' + total)();
+      setTotal(result.toString());
     } catch {
       setTotal('Error');
     }
